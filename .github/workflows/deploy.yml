@@ -1,4 +1,4 @@
-name: Slack Notification
+name: Archive Repository and Share on Slack
 
 on:
   push:
@@ -6,19 +6,15 @@ on:
       - main
 
 jobs:
-  notify:
+  archive-and-share:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Archive repository
+      - name: Create archive
         run: tar -czf repo-archive.tar.gz .
-      - name: Post to Slack
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_CHANNEL: dev-pull-request
-          SLACK_COLOR: "good"
-          SLACK_USERNAME: ${{ github.event.pull_request.user.login }}
-          SLACK_ICON_EMOJI: ":rocket:"
-          SLACK_MESSAGE: "New Figma plugin Update available here: ${{ github.event.repository.html_url }}/archive/refs/heads/main.tar.gz please download @Haider Ali Khan"
-          SLACK_WEBHOOK: https://hooks.slack.com/services/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
+      - name: Share on Slack
+        uses: rtCamp/action-slack-notify@v3.5.0
+        with:
+          status: "success"
+          message: "Archive download link: ${{ github.event.repository.html_url }}/archive/refs/heads/main.tar.gz"
