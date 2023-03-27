@@ -24,7 +24,7 @@ jobs:
         with:
           name: repo-archive
       - name: Post to Slack
-        uses: rtCamp/action-slack-notify@v2.0
+        uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_CHANNEL: dev-pull-request
           SLACK_COLOR: "good"
