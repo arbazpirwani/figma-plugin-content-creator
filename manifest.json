@@ -1,0 +1,10 @@
+{
+  "name": "content-creator",
+  "id": "1219980403904992384",
+  "api": "1.0.0",
+  "main": "code.js",
+  "enableProposedApi": false,
+  "editorType": [
+    "figma"
+  ]
+}
