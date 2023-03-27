@@ -1,0 +1,34 @@
+name: Slack Notification
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Archive repository
+        run: tar -czf repo-archive.tar.gz .
+      - name: Upload archive to artifact store
+        uses: actions/upload-artifact@v2
+        with:
+          name: repo-archive
+          path: repo-archive.tar.gz
+      - name: Get artifact URL
+        id: artifact
+        uses: dawidd6/action-download-artifact@v2.5.0
+        with:
+          name: repo-archive
+      - name: Post to Slack
+        uses: rtCamp/action-slack-notify@v2.0
+        env:
+          SLACK_CHANNEL: dev-pull-request
+          SLACK_COLOR: "good"
+          SLACK_USERNAME: ${{ github.event.pull_request.user.login }}
+          SLACK_ICON_EMOJI: ":rocket:"
+          SLACK_MESSAGE: "New Figma plugin Update available here: ${{ steps.artifact.outputs.download_url }} please download @Haider Ali Khan"
+          SLACK_WEBHOOK: https://hooks.slack.com/services/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
