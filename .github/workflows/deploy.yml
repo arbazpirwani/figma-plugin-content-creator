@@ -11,5 +11,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Create dist directory
+        run: mkdir dist
       - name: Create archive
-        run: tar -czf repo-archive.tar.gz .
+        run: tar -czf dist/repo-archive.tar.gz *
