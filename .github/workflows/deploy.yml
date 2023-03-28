@@ -20,11 +20,12 @@ jobs:
         with:
           name: repo-archive
           path: dist/repo-archive.tar.gz
-      - name: Get artifact URL
-        uses: dawidd6/action-download-artifact@v2.5.0
+      - name: Download archive to artifact
+      - uses: actions/download-artifact@v3
+        id: download
         with:
-          workflow: deploy.yml
           name: repo-archive
+          path: dist/repo-archive.tar.gz
 #      - name: Share archive on Slack
 #        uses: rtCamp/action-slack-notify@v2
 #        env:
