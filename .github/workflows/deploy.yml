@@ -21,7 +21,7 @@ jobs:
           name: repo-archive
           path: dist/repo-archive.tar.gz
       - name: Download archive to artifact
-      - uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v3
         id: download
         with:
           name: repo-archive
