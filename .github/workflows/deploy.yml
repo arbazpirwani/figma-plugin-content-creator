@@ -20,21 +20,28 @@ jobs:
         with:
           name: repo-archive
           path: dist/repo-archive.tar.gz
-      - name: Download archive to artifact
-        uses: actions/download-artifact@v3
-        id: download
+      - name: Download artifact
+        uses: dawidd6/action-download-artifact@v2.5.0
         with:
           name: repo-archive
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           path: dist
-      - name: 'Echo download path'
-        run: echo
-      - name: Share archive on Slack
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_CHANNEL: dev-pull-request
-          SLACK_COLOR: "good"
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SLACK_USERNAME: ${{ github.event.pull_request.user.login }}
-          SLACK_ICON_EMOJI: ":rocket:"
-          SLACK_MESSAGE: "New Figma plugin Update available here: ${{steps.download.outputs.download-path}} please download"
-          SLACK_WEBHOOK: https://hooks.slack.com/services/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
+
+#      - name: Download archive to artifact
+#        uses: actions/download-artifact@v3
+#        id: download
+#        with:
+#          name: repo-archive
+#          path: dist
+#      - name: 'Echo download path'
+#        run: echo
+#      - name: Share archive on Slack
+#        uses: rtCamp/action-slack-notify@v2
+#        env:
+#          SLACK_CHANNEL: dev-pull-request
+#          SLACK_COLOR: "good"
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          SLACK_USERNAME: ${{ github.event.pull_request.user.login }}
+#          SLACK_ICON_EMOJI: ":rocket:"
+#          SLACK_MESSAGE: "New Figma plugin Update available here: ${{steps.download.outputs.download-path}} please download"
+#          SLACK_WEBHOOK: https://hooks.slack.com/services/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
