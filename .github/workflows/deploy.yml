@@ -25,7 +25,7 @@ jobs:
         id: download
         with:
           name: repo-archive
-          path: dist/repo-archive.tar.gz
+          path: dist
 #      - name: Share archive on Slack
 #        uses: rtCamp/action-slack-notify@v2
 #        env:
