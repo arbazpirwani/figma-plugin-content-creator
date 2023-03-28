@@ -26,6 +26,8 @@ jobs:
         with:
           name: repo-archive
           path: dist
+      - name: 'Echo download path'
+        run: echo ${{steps.download.outputs.download-path}}
 #      - name: Share archive on Slack
 #        uses: rtCamp/action-slack-notify@v2
 #        env:
